@@ -1,10 +1,18 @@
-#include <stdio.h>
+#include "_putchar.h"
 /**
- * main - prints _putchar and and a new line
+ * main - prints '_putchar' by a new line.
+ *
  * Returns: Always 0.
  */
 int main(void)
 {
-	_putchar("\n");
+	char *sh = "_putchar";
+
+	while (*sh)
+	{
+		_putchar(*sh);
+		sh++;
+	}
+	_putchar('\n');
 	return (0);
 }
