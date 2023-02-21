@@ -1,12 +1,12 @@
-#include "main.h"
+#include "Main.h"
 /**
- * main - Entyr point.
+ * main - Entry point.
  *
  * Return: Always 0.
  */
 int main(void)
 {
-	char *sh = "main";
+	char *sh = "Main";
 
 	while (*sh)
 	{
