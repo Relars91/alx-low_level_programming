@@ -1,12 +1,12 @@
-#include "_putchar.h"
+#include "main.h"
 /**
- * main - prints '_putchar' by a new line.
+ * main - Entyr point.
  *
- * Returns: Always 0.
+ * Return: Always 0.
  */
 int main(void)
 {
-	char *sh = "_putchar";
+	char *sh = "main";
 
 	while (*sh)
 	{
@@ -14,5 +14,6 @@ int main(void)
 		sh++;
 	}
 	_putchar('\n');
+
 	return (0);
 }
