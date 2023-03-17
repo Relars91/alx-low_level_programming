@@ -1,95 +1,100 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
-#define ERR_MSG "Error"
 /**
- * is_digit - checks if a string contains a non-digit char
- * @s: string to be evaluated
- * Return: 0 if a non-digit is found, 1 otherwise
+ * printerr - function that prints error and exits
+ * @s: Pointer to string Error
+ * Return: void
  */
-int is_digit(char *s)
+void printerr(char *s)
 {
-	int i = 0;
-	while (s[i])
-	{
-
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-/**
- * _strlen - returns the length of a string
- * @s: string to evaluate
- * Return: the length of the string
- */
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (s[i] != '\0')
-
-	{
-		i++;
-	}
-	return (i);
-}
-/**
- * errors - handles errors for main
- */
-void errors(void)
-{
-	printf("Error\n");
+	for (; *s != '\0'; s++)
+		_putchar(*s);
+	_putchar('\n');
 	exit(98);
 }
 /**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: array of arguments
- * Return: always 0 (Success)
+ * length - calculates the length of a string without the null char
+ * @str: pointer to the string to size
+ * Return: int with the length
  */
-int main(int argc, char *argv[])
+int length(char (*str))
 {
-	char *s1, *s2;
-	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
-	s1 = argv[1], s2 = argv[2];
-	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+	int i;
 
-		errors();
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	len = len1 + len2 + 1;
-	result = malloc(sizeof(int) * len);
-	if (!result)
-		return (1);
-	for (i = 0; i <= len1 + len2; i++)
-		result[i] = 0;
-	for (len1 = len1 - 1; len1 >= 0; len1--)
+	for (i = 0; str[i] != '\0'; i++)
+		;
+	return (i);
+}
+/**
+ * is_zero - checks if a string is zero or if the string contains chars
+ * @args: double pointer to strings
+ * Return: void. Exit program if success
+ */
+void is_zero(char **args)
+{
+	int n, i, z;
+
+	char *err = "Error";
+
+	for (n = 1; n < 3; n++, z = 0)
 	{
-		digit1 = s1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		for (i = 0; args[n][i] != '\0'; i++)
+			if (args[n][i] < '0' || args[n][i] > '9')
+				printerr(err);
+			else if (args[n][i] != '0')
+			z++;
+		if (z == 0)
 		{
-			digit2 = s2[len2] - '0';
-			carry += result[len1 + len2 + 1] + (digit1 * digit2);
-			result[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
+			_putchar('0');
+			_putchar('\n');
+		exit(0);
 		}
-		if (carry > 0)
-			result[len1 + len2 + 1] += carry;
 	}
-	for (i = 0; i < len - 1; i++)
+}
+/**
+ * main - progrma that multiplies two big numbers as strings
+ * @argc: Number of factors passed as arguments
+ * @argv: Array of pointers to the strings of the numbers
+ * Return: void, prints the result
+ */
+int main(int argc, char **argv)
+{
+	char *r, *err = "Error";
+
+	int size_1, size_2, z = 0, i, i2, f1, f2, lleva = 0, sum = 0, k = 0, m = 0;
+
+	if (argc != 3)
+		printerr(err);
+
+	is_zero(argv);
+
+	size_1 = length(argv[1]);
+	size_2 = length(argv[2]);
+	r = malloc(size_1 * size_2 + 1);
+	if (r == NULL)
+		exit(98);
+	for (z = 0; z < size_1 * size_2 + 1; z++)
+		r[z] = '0';
+	r[z] = '\0';
+	for (i = size_1 - 1; i >= 0; i--, m++, k = 0, lleva = 0)
 	{
-		if (result[i])
-			a = 1;
-		if (a)
-			_putchar(result[i] + '0');
+		f1 = argv[1][i] - '0';
+		for (i2 = size_2 - 1; i2 >= 0; i2--, k++)
+		{
+			f2 = argv[2][i2] - '0';
+			sum = f1 * f2 + (r[k + m] - '0') + lleva;
+			lleva = sum / 10;
+			r[k + m] = (sum % 10 + '0');
+		}
+		if (lleva > 0)
+			r[k + m] = ((lleva + (r[k + m] - '0')) + '0');
 	}
-	if (!a)
-		_putchar('0');
+	for (z = size_1 * size_2 + 1; z >= 0 && r[z - 1] == '0'; z--)
+		;
+	for ( ; z > 0; z--)
+		_putchar(r[z - 1]);
 	_putchar('\n');
-	free(result);
+	free(r);
 	return (0);
 }
