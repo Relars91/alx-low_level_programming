@@ -1,13 +1,12 @@
 #include <stdio.h>
 
 /**
+ * main - check the code for Holberton School students.
  *
- * main - prints the name of the file it was compiled from
- *
- * Return: Always 0 (success)
+ * Return: 1 if an error occurred, 0 otherwise
  */
 int main(void)
 {
-	printf("%s\n", __BASE_FILE__);
+	printf("%s\n", __FILE__);
 	return (0);
 }
