@@ -23,20 +23,24 @@ listint_t *find_listint_loop(listint_t *head)
 	{
 
 		if (goat == lamb)
-	{
-	goat = head;
 
-	while (goat != lamb)
-	{
+		{
+
+			goat = head;
+
+			while (goat != lamb)
+
+			{
+
+				goat = goat->next;
+				lamb = lamb->next;
+			}
+
+			return (goat);
+		}
+
 		goat = goat->next;
-		lamb = lamb->next;
-	}
-
-		return (goat);
-	}
-
-	goat = goat->next;
-	lamb = (lamb->next)->next;
+		lamb = (lamb->next)->next;
 	}
 
 	return (NULL);
