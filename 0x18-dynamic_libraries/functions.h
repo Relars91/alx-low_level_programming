@@ -1,10 +1,13 @@
-#ifndef CALC_H
-#define CALC_H
+#ifndef _ARITHMETIC_H_
+#define _ARITHMETIC_H_
+#include <stdio.h>
 
-int add(int a, int b);
-int sub(int a, int b);
-int mul(int a, int b);
-int div(int a, int b);
-int mod(int a, int b);
+
+
+	int getSum(int a, int b)
+	int getDifference(int a, int b)
+	int getProduct(int a, int b)
+	float getQuotient(int a, int b)
+	int getModulo(int a, int b)
 
 #endif
